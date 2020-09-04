@@ -1,14 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectodeconsola_prc.pkg4;
 
-/**
- *
- * @author GUILLERMO
- */
+import proyectodeconsola_prc.pkg4.login;
+import proyectodeconsola_prc.pkg4.Menu;
+
 public class main {
-    
+
+    public static void main(String[] args) {
+        login l = new login();
+        Menu m = new Menu();
+        while (!l.ingresar()); //El while permite que el login se repita sin parar hasta que se ingrese correctamente
+        switch (l.getTipoUsuario())//A través del switch se manejaran los alcances de cada usuario
+        {
+            case "Admin":
+                m.inicializar();
+                break;
+            case "Vendedor":
+                m.inicializar();
+                break;
+            case "Invitado":
+                m.inicializar();
+                break;
+            default:
+                System.out.println("Error, no se encontro un tipo de usuario valido");
+                break;
+        }
+    }
 }
