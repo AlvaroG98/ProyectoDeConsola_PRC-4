@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoconsolaprc4;
+package proyectodeconsola_prc.pkg4;
 
 import java.util.Scanner;
 

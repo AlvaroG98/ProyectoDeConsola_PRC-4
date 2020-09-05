@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package proyectodeconsola_prc.pkg4;
-
+import java.util.Scanner;
 /**
  *
  * @author Josue Quinteros
@@ -65,5 +65,3 @@ public class Catalogo {
     19.MELON (10 U.)
     20.MANZANA (18 U.)
     */
-    
-}
