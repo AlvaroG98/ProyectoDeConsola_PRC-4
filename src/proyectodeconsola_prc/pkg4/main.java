@@ -1,13 +1,11 @@
 package proyectodeconsola_prc.pkg4;
-
 import java.util.Scanner;
 import proyectodeconsola_prc.pkg4.login;
 import proyectodeconsola_prc.pkg4.Menu;
-
 public class main {
 
     public static void main(String[] args) {
-       login l = new login();
+        login l = new login();
         Menu m2 = new Menu();
         Scanner t = new Scanner(System.in);
         int op = 0;
@@ -23,10 +21,9 @@ public class main {
                     ///LOGUEARSE
                     boolean isValid = l.ingresar();
                     if (isValid) {
-                        switch (l.getTipoUsuario())
-                        {
+                        switch (l.getTipoUsuario()) {
                             case "Admin":
-                                m2.MenuAdmin();
+                                m2.MenuAdmin(l);
                                 break;
                             case "Vendedor":
                                 m2.MenuVendedor();
@@ -52,5 +49,4 @@ public class main {
             System.out.println();
         } while (op != 2);
     }
-
-    }
+}

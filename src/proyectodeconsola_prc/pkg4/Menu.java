@@ -1,22 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectodeconsola_prc.pkg4;
-
 import java.util.Scanner;
-
-/**
- *
- * @author PabloLandos
- */
+import proyectodeconsola_prc.pkg4.login;
 public class Menu {
+
     //Atributos
     private Scanner teclado;
 
-
-    public void MenuAdmin() {
+    public void MenuAdmin(login l) {
         int opcion = 0;
         teclado = new Scanner(System.in);
         do {
@@ -29,7 +19,7 @@ public class Menu {
             opcion = teclado.nextInt();
             switch (opcion) {
                 //REALIZAR VENTA
-                case 1: {
+                case 1:
                     System.out.println("1- huevos c/u $0.10");
                     System.out.println("2- pollo c/u $5.00");
                     System.out.println("3- aceite c/u $3.00");
@@ -42,13 +32,17 @@ public class Menu {
                     System.out.println("10- desechables c/u $3.25");
                     System.out.print("Ingrese el codigo de producto y cantidad: ");
                     System.out.println();
-                }
-                break;
+                    break;
                 case 2:
                     //CONSULTAR INVENTARIOS
                     break;
                 case 3:
-                    //CAMBIAR CONTRASEÑA               
+                    //CAMBIAR CONTRASEÑA     
+                    if(l.cambiarContraseña())
+                    {
+                        System.out.print("Volviendo a la pantalla de inicio de sesion");
+                        opcion = 4;
+                    }
                     break;
                 case 4:
                     //SALIR DEL SISTEMA
