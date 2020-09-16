@@ -1,12 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package proyectodeconsola_prc.pkg4;
-import java.util.Scanner;
-import proyectodeconsola_prc.pkg4.login;
-public class Menu {
 
+import java.util.Scanner;
+
+/**
+ *
+ * @author PabloLandos
+ */
+public class Menu {
     //Atributos
     private Scanner teclado;
-
-    public void MenuAdmin(login l) {
+    private Catalogo c[];
+    public Menu(Catalogo c2[]){
+    this.c=c2;
+    }
+    public Menu(){
+    
+    }
+    public void mostrar1(){for(int i=0;i<10;i++){
+                    System.out.println(c[i].GetName()+" "+c[i].GetUnidades());
+                    }
+                 }
+    public void mostrar2(){for(int i=0;i<10;i++){
+                    System.out.println(c[i].GetName()+" "+c[i].GetPrecio());
+                    }
+    }
+  
+    public void MenuAdmin() {
         int opcion = 0;
         teclado = new Scanner(System.in);
         do {
@@ -19,7 +43,8 @@ public class Menu {
             opcion = teclado.nextInt();
             switch (opcion) {
                 //REALIZAR VENTA
-                case 1:
+                case 1: {
+                    int id,ct;
                     System.out.println("1- huevos c/u $0.10");
                     System.out.println("2- pollo c/u $5.00");
                     System.out.println("3- aceite c/u $3.00");
@@ -31,18 +56,17 @@ public class Menu {
                     System.out.println("9- gaseosa c/u $1.80");
                     System.out.println("10- desechables c/u $3.25");
                     System.out.print("Ingrese el codigo de producto y cantidad: ");
-                    System.out.println();
-                    break;
+                    id=Integer.parseInt(teclado.next());
+                    ct=Integer.parseInt(teclado.next());
+                    c[id-1].Compras(ct);
+                }
+                break;
                 case 2:
-                    //CONSULTAR INVENTARIOS
+                    //CONSULTAR INVENTARIOS 
+                    mostrar1();
                     break;
                 case 3:
-                    //CAMBIAR CONTRASEÑA     
-                    if(l.cambiarContraseña())
-                    {
-                        System.out.print("Volviendo a la pantalla de inicio de sesion");
-                        opcion = 4;
-                    }
+                    //CAMBIAR CONTRASEÑA               
                     break;
                 case 4:
                     //SALIR DEL SISTEMA
@@ -68,6 +92,7 @@ public class Menu {
             switch (opcion) {
                 //REALIZAR VENTA
                 case 1: {
+                    int id,ct;
                     System.out.println("1- huevos c/u $0.10");
                     System.out.println("2- pollo c/u $5.00");
                     System.out.println("3- aceite c/u $3.00");
@@ -79,10 +104,14 @@ public class Menu {
                     System.out.println("9- gaseosa c/u $1.80");
                     System.out.println("10- desechables c/u $3.25");
                     System.out.print("Ingrese el codigo de producto y cantidad: ");
+                    id=Integer.parseInt(teclado.next());
+                    ct=Integer.parseInt(teclado.next());
+                    c[id-1].Compras(ct);
                 }
                 break;
                 case 2:
                     //CONSULTAR INVENTARIOS
+                    mostrar1();
                     break;
                 case 3:
                     //SALIR DEL SISTEMA                   
@@ -108,7 +137,8 @@ public class Menu {
                 //CONSULTAR PRECIOS
                 case 1: {
                     System.out.println("Consultando precios...");
-                }
+                    mostrar2();
+                     }
                 break;
                 case 2:
                     //SALIR DEL SISTEMA                   
@@ -120,5 +150,4 @@ public class Menu {
             System.out.println();
         } while (opcion != 2);
     }
-
 }
