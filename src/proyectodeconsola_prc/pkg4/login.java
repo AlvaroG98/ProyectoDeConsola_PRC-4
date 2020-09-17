@@ -3,6 +3,7 @@ package proyectodeconsola_prc.pkg4;
 import java.io.*;
 import java.util.Scanner;
 import java.nio.file.*;
+import proyectodeconsola_prc.pkg4.log;
 
 public class login {
 
@@ -12,6 +13,7 @@ public class login {
     private String contrasena;
     private String tipoUsuario;
     private boolean primerInicio;
+    private log lo;
 
     public String[][] getDbUsers() {
         return dbUsers;
@@ -97,6 +99,8 @@ public class login {
             in.close();
         } catch (IOException e) {
             e.getCause();
+            lo.setContenido(e.getMessage());
+            lo.escribirLog(this.usuario);
         }
         return resultado;
     }

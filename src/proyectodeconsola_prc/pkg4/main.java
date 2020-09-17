@@ -5,6 +5,7 @@ import proyectodeconsola_prc.pkg4.login;
 import proyectodeconsola_prc.pkg4.Menu;
 import proyectodeconsola_prc.pkg4.Ventas;
 import proyectodeconsola_prc.pkg4.bitacora;
+import proyectodeconsola_prc.pkg4.log;
 
 public class main {
 
@@ -15,6 +16,7 @@ public class main {
         Ventas[] v = new Ventas[10];
         v[0] = new Ventas();
         int contVentas = 0;
+        log lo = new log();
         Catalogo[] catalogo = new Catalogo[20];
         catalogo[0] = new Catalogo(1, "pan", 1.30, 20);
         catalogo[1] = new Catalogo(2, "leche", 1.5, 15);
@@ -52,16 +54,16 @@ public class main {
                     if (isValid) {
                         switch (l.getTipoUsuario()) {
                             case "Admin":
-                                b.crearBitacora(l);
-                                m2.MenuAdmin(l, v, catalogo, contVentas);
+                                b.crearBitacora(l,lo);
+                                m2.MenuAdmin(l, v, catalogo, contVentas,lo);
                                 break;
                             case "Vendedor":
-                                b.crearBitacora(l);
-                                m2.MenuVendedor(l, v, catalogo, contVentas);
+                                b.crearBitacora(l,lo);
+                                m2.MenuVendedor(l, v, catalogo, contVentas,lo);
                                 break;
                             case "Invitado":
-                                b.crearBitacora(l);
-                                m2.MenuInvitado(l, v, catalogo, contVentas);
+                                b.crearBitacora(l,lo);
+                                m2.MenuInvitado(l, v, catalogo, contVentas,lo);
                                 break;
                             default:
                                 System.out.println("Error, no se encontro un tipo de usuario valido");
@@ -72,7 +74,7 @@ public class main {
                 break;
                 case 2:
                     ///SALIR DEL SISTEMA
-                    b.Comprimir();
+                    b.Comprimir(l,lo);
                     System.out.println("Hasta la proxima......");
                     break;
                 default:
