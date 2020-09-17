@@ -1,6 +1,7 @@
 package proyectodeconsola_prc.pkg4;
 import java.util.Scanner;
 import proyectodeconsola_prc.pkg4.login;
+import proyectodeconsola_prc.pkg4.bitacora;
 import proyectodeconsola_prc.pkg4.Ventas;
 public class Menu {
 
@@ -9,6 +10,7 @@ public class Menu {
 
     public void MenuAdmin(login l, Ventas[] v, Catalogo[] catalogo, int contVentas) {
         int opcion = 0;
+        bitacora b = new bitacora();
         teclado = new Scanner(System.in);
         do {
             System.out.println("Bienvenido" + " ");
@@ -32,6 +34,7 @@ public class Menu {
                     //CAMBIAR CONTRASEÑA     
                     if(l.cambiarContraseña())
                     {
+                        b.cerrarSesion(l);
                         System.out.print("Volviendo a la pantalla de inicio de sesion");
                         opcion = 4;
                     }
@@ -47,8 +50,9 @@ public class Menu {
         } while (opcion != 4);
     }
 
-    public void MenuVendedor() {
+    public void MenuVendedor(login l, Ventas[] v, Catalogo[] catalogo, int contVentas) {
         int opcion = 0;
+        bitacora b = new bitacora();
         teclado = new Scanner(System.in);
         do {
             System.out.println("Bienvendio" + " ");
@@ -60,15 +64,17 @@ public class Menu {
             switch (opcion) {
                 //REALIZAR VENTA
                 case 1: {
-                    
+                    v[0].mostrarCatalogoVenta(catalogo);
+                    v[contVentas].agregarProductos(catalogo, contVentas);
                 }
                 break;
                 case 2:
                     //CONSULTAR INVENTARIOS
-                    
+                    v[0].consultarInventario(catalogo);
                     break;
                 case 3:
-                    //SALIR DEL SISTEMA                   
+                    //SALIR DEL SISTEMA  
+                    b.cerrarSesion(l);
                     System.out.println("Saliendo del sistema...");
                     break;
                 default:
@@ -78,8 +84,9 @@ public class Menu {
         } while (opcion != 3);
     }
 
-    public void MenuInvitado() {
+    public void MenuInvitado(login l, Ventas[] v, Catalogo[] catalogo, int contVentas) {
         int opcion = 0;
+        bitacora b = new bitacora();
         teclado = new Scanner(System.in);
         do {
             System.out.println("Bienvendio" + " ");
@@ -91,10 +98,12 @@ public class Menu {
                 //CONSULTAR PRECIOS
                 case 1: {
                     System.out.println("Consultando precios...");
+                    v[0].mostrarCatalogoVenta(catalogo);
                 }
                 break;
                 case 2:
-                    //SALIR DEL SISTEMA                   
+                    //SALIR DEL SISTEMA   
+                    b.cerrarSesion(l);
                     System.out.println("Saliendo del sistema...");
                     break;
                 default:

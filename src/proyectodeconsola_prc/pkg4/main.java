@@ -4,11 +4,13 @@ import java.util.Scanner;
 import proyectodeconsola_prc.pkg4.login;
 import proyectodeconsola_prc.pkg4.Menu;
 import proyectodeconsola_prc.pkg4.Ventas;
+import proyectodeconsola_prc.pkg4.bitacora;
 
 public class main {
 
     public static void main(String[] args) {
         login l = new login();
+        bitacora b = new bitacora();
         Menu m2 = new Menu();
         Ventas[] v = new Ventas[10];
         v[0] = new Ventas();
@@ -50,13 +52,16 @@ public class main {
                     if (isValid) {
                         switch (l.getTipoUsuario()) {
                             case "Admin":
+                                b.crearBitacora(l);
                                 m2.MenuAdmin(l, v, catalogo, contVentas);
                                 break;
                             case "Vendedor":
-                                m2.MenuVendedor();
+                                b.crearBitacora(l);
+                                m2.MenuVendedor(l, v, catalogo, contVentas);
                                 break;
                             case "Invitado":
-                                m2.MenuInvitado();
+                                b.crearBitacora(l);
+                                m2.MenuInvitado(l, v, catalogo, contVentas);
                                 break;
                             default:
                                 System.out.println("Error, no se encontro un tipo de usuario valido");
@@ -67,6 +72,7 @@ public class main {
                 break;
                 case 2:
                     ///SALIR DEL SISTEMA
+                    b.Comprimir();
                     System.out.println("Hasta la proxima......");
                     break;
                 default:

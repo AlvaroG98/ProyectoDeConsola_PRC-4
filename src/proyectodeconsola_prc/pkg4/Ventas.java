@@ -1,6 +1,10 @@
 package proyectodeconsola_prc.pkg4;
 
+import java.io.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import proyectodeconsola_prc.pkg4.Catalogo;
+import proyectodeconsola_prc.pkg4.bitacora;
 import java.util.Scanner;
 
 public class Ventas {
@@ -11,6 +15,8 @@ public class Ventas {
     private float totalVenta;
     private boolean pedirDisculpas;
     private boolean hacerDescuento;
+    private String fecha, dia, mes, anio;
+    private Calendar c;
 
     public Ventas() {
         this.idVenta = 0;
@@ -22,7 +28,7 @@ public class Ventas {
     }
 
     public void mostrarCatalogoVenta(Catalogo[] catalogo) {
-        System.out.println("id nombre cantidad");
+        System.out.println("id nombre precio");
         for (int i = 0; i < 20; i++) {
             System.out.println(catalogo[i].Getid() + "-" + catalogo[i].GetName() + " c/u $" + catalogo[i].GetPrecio());
         }
@@ -137,19 +143,24 @@ public class Ventas {
     }
     public void facturar()
     {
+        String contenido;
         System.out.println("Factura de compra");
         System.out.println("Supermercado don Diego");
         
         System.out.println("-----------------------");
+        contenido = "Factura de compra" + "\nSupermercado don Diego" + "\n-----------------------";
         for (int i = 0; i < this.contProd; i++) {
             System.out.println(lst[i].GetName() + "---" + lst[i].GetUnidades() + "x$" + lst[i].GetPrecio() + " = $" + lst[i].GetUnidades()*lst[i].GetPrecio());
+            contenido += "\n" + lst[i].GetName() + "---" + lst[i].GetUnidades() + "x$" + lst[i].GetPrecio() + " = $" + lst[i].GetUnidades()*lst[i].GetPrecio();
         }
         System.out.println("\tTotal de factura: $" + this.totalVenta);
         System.out.println("-----------------------");
+        contenido += "\n\tTotal de factura: $" + this.totalVenta + "\n-----------------------";
         if(this.hacerDescuento)
         {
-            System.out.println("-Se aplico un descuento del 3% al ");
+            System.out.println("-Se aplico un descuento del 3% al");
             System.out.println("total porque la compra excedia los $20");
+            contenido += "\n-Se aplico un descuento del 3% al" + "\ntotal porque la compra excedia los $20";
         }
         if(this.pedirDisculpas)
         {
@@ -157,6 +168,29 @@ public class Ventas {
             System.out.println("seleccionado no cumplia con la cantidad ");
             System.out.println("de existencias solicitadas, se le entrego ");
             System.out.println("toda la cantidad que habia en existencia");
+            contenido += "\n-Lo sentimos, alguno de los productos " + "\nseleccionado no cumplia con la cantidad " + "\nde existencias solicitadas, se le entrego " + "\ntoda la cantidad que habia en existencia";
         }
+        this.c = new GregorianCalendar();
+        dia = Integer.toString(c.get(Calendar.DATE));
+        mes = Integer.toString(c.get(Calendar.MONTH)+1);
+        anio = Integer.toString(c.get(Calendar.YEAR));
+        fecha =  dia + "-" + mes + "-" + anio;
+         try
+            {
+                File file = new File("factura/FC"+ this.idVenta + "_" + fecha + ".txt");
+                if(!file.exists())
+                {
+                    file.createNewFile();
+                }
+                FileWriter fw = new FileWriter(file.getAbsoluteFile(),true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(contenido);
+                bw.newLine();
+                bw.close();
+             }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
     }
 }
