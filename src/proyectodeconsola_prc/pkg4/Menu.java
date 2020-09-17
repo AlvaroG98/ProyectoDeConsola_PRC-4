@@ -43,6 +43,7 @@ public class Menu {
                     break;
                 case 4:
                     //SALIR DEL SISTEMA
+                    b.cerrarSesion(l,lo);
                     System.out.println("Saliendo del sistema....");
                     break;
                 default:
