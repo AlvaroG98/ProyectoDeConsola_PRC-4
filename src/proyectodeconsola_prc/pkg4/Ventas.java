@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import proyectodeconsola_prc.pkg4.Catalogo;
-import proyectodeconsola_prc.pkg4.bitacora;
+import proyectodeconsola_prc.pkg4.log;
 import java.util.Scanner;
 
 public class Ventas {
@@ -17,6 +17,7 @@ public class Ventas {
     private boolean hacerDescuento;
     private String fecha, dia, mes, anio;
     private Calendar c;
+    private log lo;
 
     public Ventas() {
         this.idVenta = 0;
@@ -41,7 +42,7 @@ public class Ventas {
         }
     }
 
-    public void consultarInventario(Catalogo[] catalogo) {
+    public void consultarInventario(Catalogo[] catalogo,login l) {
         Scanner scn = new Scanner(System.in);
         String palabra;
         int id = 0, cont = 0;
@@ -58,6 +59,9 @@ public class Ventas {
                 id = Integer.parseInt(palabra);
                 isNumber = true;
             } catch (Exception e) {
+                e.getCause();
+                lo.setContenido(e.getMessage());
+                lo.escribirLog(l.getUsuario());
 
             }
             if (isNumber && id > 0 && id <= 20) {
@@ -86,7 +90,7 @@ public class Ventas {
         }
     }
 
-    public boolean agregarProductos(Catalogo[] catalogo, int contVentas) {
+    public boolean agregarProductos(Catalogo[] catalogo, int contVentas, login l,log lo) {
         Scanner scn = new Scanner(System.in);
         System.out.println("Digite la cadena de texto en donde indique los productos y cantidades de la venta");
         String palabra = scn.nextLine();
@@ -119,6 +123,9 @@ public class Ventas {
                 } catch (Exception e) {
                     System.out.println("Error, ha ingresado de manera incorrecta la cadena de caracteres");
                     resultado = false;
+                    String m =e.getMessage();
+                    lo.setContenido(m);
+                    lo.escribirLog(l.getUsuario());
                 }
             }
             if (resultado) {
@@ -134,14 +141,14 @@ public class Ventas {
                 }
                 contVentas++;
                 this.idVenta = contVentas;
-                facturar();
+                facturar(l);
             }
         } else {
             System.out.println("Error, el numero de digitos ingresados deben de ser pares");
         }
         return resultado;
     }
-    public void facturar()
+    public void facturar(login l)
     {
         String contenido;
         System.out.println("Factura de compra");
@@ -191,6 +198,9 @@ public class Ventas {
             catch(Exception e)
             {
                 e.printStackTrace();
+                e.getCause();
+                lo.setContenido(e.getMessage());
+                lo.escribirLog(l.getUsuario());
             }
     }
 }
