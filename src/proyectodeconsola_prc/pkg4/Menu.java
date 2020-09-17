@@ -1,12 +1,13 @@
 package proyectodeconsola_prc.pkg4;
 import java.util.Scanner;
 import proyectodeconsola_prc.pkg4.login;
+import proyectodeconsola_prc.pkg4.Ventas;
 public class Menu {
 
     //Atributos
     private Scanner teclado;
 
-    public void MenuAdmin(login l) {
+    public void MenuAdmin(login l, Ventas[] v, Catalogo[] catalogo, int contVentas) {
         int opcion = 0;
         teclado = new Scanner(System.in);
         do {
@@ -20,21 +21,12 @@ public class Menu {
             switch (opcion) {
                 //REALIZAR VENTA
                 case 1:
-                    System.out.println("1- huevos c/u $0.10");
-                    System.out.println("2- pollo c/u $5.00");
-                    System.out.println("3- aceite c/u $3.00");
-                    System.out.println("4- fósforos c/u $0.50");
-                    System.out.println("5- dulces c/u $ 0.80");
-                    System.out.println("6- margarina c/u $0.30");
-                    System.out.println("7- jabón c/u $ 2.25");
-                    System.out.println("8- carne c/u $ 2.75");
-                    System.out.println("9- gaseosa c/u $1.80");
-                    System.out.println("10- desechables c/u $3.25");
-                    System.out.print("Ingrese el codigo de producto y cantidad: ");
-                    System.out.println();
+                    v[0].mostrarCatalogoVenta(catalogo);
+                    v[contVentas].agregarProductos(catalogo, contVentas);
                     break;
                 case 2:
                     //CONSULTAR INVENTARIOS
+                    v[0].consultarInventario(catalogo);
                     break;
                 case 3:
                     //CAMBIAR CONTRASEÑA     
@@ -68,21 +60,12 @@ public class Menu {
             switch (opcion) {
                 //REALIZAR VENTA
                 case 1: {
-                    System.out.println("1- huevos c/u $0.10");
-                    System.out.println("2- pollo c/u $5.00");
-                    System.out.println("3- aceite c/u $3.00");
-                    System.out.println("4- fósforos c/u $0.50");
-                    System.out.println("5- dulces c/u $ 0.80");
-                    System.out.println("6- margarina c/u $0.30");
-                    System.out.println("7- jabón c/u $ 2.25");
-                    System.out.println("8- carne c/u $ 2.75");
-                    System.out.println("9- gaseosa c/u $1.80");
-                    System.out.println("10- desechables c/u $3.25");
-                    System.out.print("Ingrese el codigo de producto y cantidad: ");
+                    
                 }
                 break;
                 case 2:
                     //CONSULTAR INVENTARIOS
+                    
                     break;
                 case 3:
                     //SALIR DEL SISTEMA                   
